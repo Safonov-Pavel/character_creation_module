@@ -1,19 +1,20 @@
 from random import randint
+from typing import Union
 
 # from graphic_arts.start_game_banner import run_screensaver
 
-DEFAULT_ATTACK = 5
-DEFAULT_DEFENCE = 10
-DEFAULT_STAMINA = 80
+DEFAULT_ATTACK: int = 5
+DEFAULT_DEFENCE: int = 10
+DEFAULT_STAMINA: int = 80
 
 
 class Character:
     # Новая константа.
-    BRIEF_DESC_CHAR_CLASS = 'отважный любитель приключений'
-    RANGE_VALUE_ATTACK = (1, 3)
-    RANGE_VALUE_DEFENCE = (1, 5)
-    SPECIAL_BUFF = 15
-    SPECIAL_SKILL = 'Удача'
+    BRIEF_DESC_CHAR_CLASS: str = 'отважный любитель приключений'
+    RANGE_VALUE_ATTACK: tuple = (1, 3)
+    RANGE_VALUE_DEFENCE: tuple = (1, 5)
+    SPECIAL_BUFF: int = 15
+    SPECIAL_SKILL: str = 'Удача'
 
     def __init__(self, name):
         self.name = name
@@ -71,9 +72,9 @@ def choice_char_class(char_name: str) -> Character:
     """
     # Добавили словарь, в котором соотносится
     # ввод пользователя и класс персонажа.
-    game_classes = {'warrior': Warrior, 'mage': Mage, 'healer': Healer}
+    game_classes: dict = {'warrior': Warrior, 'mage': Mage, 'healer': Healer}
 
-    approve_choice: str = None
+    approve_choice: Union[str, None] = None
 
     while approve_choice != 'y':
         selected_class = input('Введи название персонажа, '
@@ -88,12 +89,12 @@ def choice_char_class(char_name: str) -> Character:
     return char_class
 
 
-def start_training(character):
+def start_training(character: Character) -> str:
     """
     Принимает на вход имя и класс персонажа.
     Возвращает сообщения о результатах цикла тренировки персонажа.
     """
-    commands = {
+    commands: dict = {
         'attack': character.attack,
         'defence': character.defence,
         'special': character.special,
@@ -105,7 +106,7 @@ def start_training(character):
           'special — чтобы использовать свою суперсилу.')
     print('Если не хочешь тренироваться, введи команду skip.')
 
-    cmd = None
+    cmd: Union[str, None] = None
     while cmd != 'skip':
         cmd = input('Введи команду: ')
         if cmd in commands.keys():
@@ -117,10 +118,10 @@ if __name__ == '__main__':
     # run_screensaver()
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
-    char_name = input('...назови себя: ')
+    char_name: str = input('...назови себя: ')
     print(f'Здравствуй, {char_name}! '
           'Сейчас твоя выносливость — 80, атака — 5 и защита — 10.')
     print('Ты можешь выбрать один из трёх путей силы:')
     print('Воитель, Маг, Лекарь')
-    char_class = choice_char_class(char_name)
+    char_class: Character = choice_char_class(char_name)
     start_training(char_class)
