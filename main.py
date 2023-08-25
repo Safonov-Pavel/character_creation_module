@@ -3,8 +3,8 @@ from random import randint
 # from graphic_arts.start_game_banner import run_screensaver
 
 DEFAULT_ATTACK = 5
-DEFAULT_DEFENCE = 10 
-DEFAULT_STAMINA = 80 
+DEFAULT_DEFENCE = 10
+DEFAULT_STAMINA = 80
 
 
 class Character:
@@ -29,7 +29,7 @@ class Character:
     def special(self):
         return (f'{self.name} применил специальное умение '
                 f'"{self.SPECIAL_SKILL} {self.SPECIAL_BUFF}"')
-    
+
     # Новый метод базового класса.
     def __str__(self):
         return f'{self.__class__.__name__} - {self.BRIEF_DESC_CHAR_CLASS}.'
@@ -69,15 +69,16 @@ def choice_char_class(char_name: str) -> Character:
     Возвращает строку с выбранным
     классом персонажа.
     """
-    # Добавили словарь, в котором соотносится ввод пользователя и класс персонажа.
+    # Добавили словарь, в котором соотносится
+    # ввод пользователя и класс персонажа.
     game_classes = {'warrior': Warrior, 'mage': Mage, 'healer': Healer}
-    
-    approve_choice: str  = None
-    
+
+    approve_choice: str = None
+
     while approve_choice != 'y':
         selected_class = input('Введи название персонажа, '
-                           'за которого хочешь играть: Воитель — warrior, '
-                           'Маг — mage, Лекарь — healer: ')
+                               'за которого хочешь играть: Воитель — warrior, '
+                               'Маг — mage, Лекарь — healer: ')
         char_class: Character = game_classes[selected_class](char_name)
         # Вывели в терминал описание персонажа.
         print(char_class)
@@ -93,11 +94,11 @@ def start_training(character):
     Возвращает сообщения о результатах цикла тренировки персонажа.
     """
     commands = {
-        'attack'  : character.attack,
-        'defence' : character.defence,
-        'special' : character.special,
+        'attack': character.attack,
+        'defence': character.defence,
+        'special': character.special,
     }
-    
+
     print('Потренируйся управлять своими навыками.')
     print('Введи одну из команд: attack — чтобы атаковать противника, '
           'defence — чтобы блокировать атаку противника или '
